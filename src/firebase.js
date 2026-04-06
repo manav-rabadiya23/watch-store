@@ -1,18 +1,24 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
+// DEBUG (you can remove later)
+console.log("Firebase API key:", import.meta.env.VITE_FIREBASE_API_KEY);
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDWAceEZOZDtf5q_tYAipuOXoiov6bFm0c",
-  authDomain: "watch-store-ccdca.firebaseapp.com",
-  projectId: "watch-store-ccdca",
-  storageBucket: "watch-store-ccdca.firebasestorage.app",
-  messagingSenderId: "521212287315",
-  appId: "1:521212287315:web:48c4a8343fd899ed69e9a6",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
 
+// Auth
 export const auth = getAuth(app);
+
+// Google Provider
 export const googleProvider = new GoogleAuthProvider();
 
 export default app;
