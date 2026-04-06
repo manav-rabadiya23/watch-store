@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useCart } from "../context/CartContext";
 import { useOrders } from "../context/OrdersContext";
+import { generateInvoice } from "../utils/generateInvoice";
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -94,7 +96,7 @@ export default function Checkout() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validate()) return;
@@ -124,16 +126,43 @@ export default function Checkout() {
         throw new Error("Order was not created correctly.");
       }
 
+      const loadingToastId = toast.loading("Generating invoice...");
+
+      await generateInvoice({
+        orderId: createdOrder.id,
+        date: new Date(
+          createdOrder.date || createdOrder.createdAt,
+        ).toLocaleString("en-IN"),
+        customer: {
+          name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.address,
+          city: formData.city,
+          pincode: formData.pincode,
+        },
+        items: createdOrder.items,
+        subtotal: createdOrder.subtotal,
+        shipping: createdOrder.shipping,
+        gstAmount: createdOrder.gst,
+        total: createdOrder.total,
+        paymentMethod: createdOrder.paymentMethod,
+      });
+
+      toast.dismiss(loadingToastId);
+      toast.success("Order placed and invoice downloaded");
+
       clearCart();
 
-      navigate("/order-success", {
-        state: { orderId: createdOrder.id },
-      });
+      setTimeout(() => {
+        navigate(`/track-order/${createdOrder.id}`);
+      }, 1400);
     } catch (error) {
       setErrors((prev) => ({
         ...prev,
         submit: error.message || "Failed to place order.",
       }));
+      toast.error(error.message || "Failed to place order");
     } finally {
       setIsPlacingOrder(false);
     }

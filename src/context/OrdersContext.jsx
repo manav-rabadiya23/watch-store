@@ -29,13 +29,15 @@ export function OrdersProvider({ children }) {
         throw new Error("User must be logged in to place an order.");
       }
 
+      const now = new Date().toISOString();
+
       const newOrder = {
         id: `ORD-${Date.now()}`,
         userId: user.uid,
         userEmail: user.email || "",
-        createdAt: new Date().toISOString(),
+        createdAt: now,
+        date: now,
         status: "Confirmed",
-
         items: Array.isArray(orderData.items)
           ? orderData.items.map((item) => ({
               id: item.id,
@@ -46,7 +48,6 @@ export function OrdersProvider({ children }) {
               image: item.image || "",
             }))
           : [],
-
         shippingInfo: {
           fullName: orderData.shippingInfo?.fullName || "",
           email: orderData.shippingInfo?.email || "",
@@ -56,7 +57,6 @@ export function OrdersProvider({ children }) {
           state: orderData.shippingInfo?.state || "",
           pincode: orderData.shippingInfo?.pincode || "",
         },
-
         payment: orderData.paymentMethod || "Cash on Delivery",
         paymentMethod: orderData.paymentMethod || "Cash on Delivery",
         subtotal: Number(orderData.subtotal || 0),

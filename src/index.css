@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* =========================
+   ANIMATIONS
+========================= */
+
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -31,7 +35,10 @@
   animation: softPulse 2.5s ease-in-out infinite;
 }
 
-/* smooth global transition */
+/* =========================
+   GLOBAL SETTINGS
+========================= */
+
 html {
   scroll-behavior: smooth;
 }
@@ -48,7 +55,10 @@ body {
     color 0.3s ease;
 }
 
-/* FULL PROJECT DARK MODE OVERRIDES */
+/* =========================
+   DARK MODE OVERRIDES
+========================= */
+
 html.dark body,
 html.dark #root {
   background-color: #020617;
@@ -128,4 +138,42 @@ html.dark .shadow-lg,
 html.dark .shadow-xl,
 html.dark .shadow-2xl {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* =========================
+   ✅ CENTER POPUP (TOAST FIX)
+========================= */
+
+/* FULL CENTER (vertical + horizontal) */
+.Toastify__toast-container--top-center {
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: auto !important;
+}
+
+/* TOAST BOX */
+.Toastify__toast {
+  border-radius: 16px;
+  padding: 16px 20px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* COLORS */
+.Toastify__toast--success {
+  background: #10b981;
+}
+
+.Toastify__toast--error {
+  background: #ef4444;
+}
+
+.Toastify__toast--info {
+  background: #3b82f6;
+}
+
+.Toastify__toast--loading {
+  background: #6366f1;
 }

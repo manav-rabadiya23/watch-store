@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { toast } from "react-toastify";
 
 const CartContext = createContext(undefined);
 
@@ -31,10 +32,14 @@ export function CartProvider({ children }) {
   }, [cartItems]);
 
   const addToCart = (product) => {
+    let wasExisting = false;
+
     setCartItems((prev) => {
       const existingIndex = prev.findIndex((item) => item.id === product.id);
 
       if (existingIndex !== -1) {
+        wasExisting = true;
+
         const updated = [...prev];
         updated[existingIndex] = {
           ...updated[existingIndex],
@@ -55,10 +60,17 @@ export function CartProvider({ children }) {
         },
       ];
     });
+
+    if (wasExisting) {
+      toast.info("Cart quantity updated");
+    } else {
+      toast.success("Item added to cart");
+    }
   };
 
   const removeFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
+    toast.info("Item removed from cart");
   };
 
   const increaseQty = (id) => {

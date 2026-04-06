@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { toast } from "react-toastify";
 
 const WishlistContext = createContext(undefined);
 
@@ -16,9 +17,15 @@ export function WishlistProvider({ children }) {
   }, [wishlistItems]);
 
   const addToWishlist = (product) => {
+    let alreadyExists = false;
+
     setWishlistItems((prev) => {
       const exists = prev.some((item) => item.id === product.id);
-      if (exists) return prev;
+
+      if (exists) {
+        alreadyExists = true;
+        return prev;
+      }
 
       return [
         ...prev,
@@ -34,10 +41,17 @@ export function WishlistProvider({ children }) {
         },
       ];
     });
+
+    if (alreadyExists) {
+      toast.info("Item already in wishlist");
+    } else {
+      toast.success("Item added to wishlist");
+    }
   };
 
   const removeFromWishlist = (id) => {
     setWishlistItems((prev) => prev.filter((item) => item.id !== id));
+    toast.info("Item removed from wishlist");
   };
 
   const clearWishlist = () => {
@@ -58,6 +72,7 @@ export function WishlistProvider({ children }) {
     });
 
     removeFromWishlist(id);
+    toast.success("Item moved to cart");
     return true;
   };
 

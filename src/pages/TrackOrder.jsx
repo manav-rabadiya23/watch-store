@@ -55,15 +55,16 @@ export default function TrackOrder() {
   };
 
   const estimatedDelivery = useMemo(() => {
-    if (!order?.date) return null;
+    const sourceDate = order?.date || order?.createdAt;
+    if (!sourceDate) return null;
 
-    const baseDate = new Date(order.date);
+    const baseDate = new Date(sourceDate);
     if (Number.isNaN(baseDate.getTime())) return null;
 
     const deliveryDate = new Date(baseDate);
     deliveryDate.setDate(deliveryDate.getDate() + 5);
     return deliveryDate;
-  }, [order?.date]);
+  }, [order?.date, order?.createdAt]);
 
   const getStatusBadge = (status) => {
     switch ((status || "").toLowerCase()) {
@@ -138,6 +139,7 @@ export default function TrackOrder() {
 
   const shippingInfo = order.shippingInfo || {};
   const items = order.items || order.products || [];
+  const orderDate = order.date || order.createdAt;
 
   return (
     <section className="min-h-screen bg-[#f7f4ef] px-4 py-10 text-slate-800 dark:bg-slate-950 dark:text-slate-100">
@@ -182,7 +184,7 @@ export default function TrackOrder() {
                   </p>
                   <h2 className="mt-2 text-2xl font-bold">#{shortOrderId}</h2>
                   <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
-                    Ordered on {formatDate(order.date)}
+                    Ordered on {formatDate(orderDate)}
                   </p>
                 </div>
 
@@ -356,7 +358,7 @@ export default function TrackOrder() {
                     Order Date
                   </span>
                   <span className="text-right font-semibold">
-                    {formatDate(order.date)}
+                    {formatDate(orderDate)}
                   </span>
                 </div>
 
