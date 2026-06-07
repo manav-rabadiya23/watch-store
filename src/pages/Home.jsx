@@ -4,6 +4,7 @@ import FeaturedProducts from "../components/FeaturedProducts";
 const Home = () => {
   return (
     <>
+      <Hero />
       <FeaturedProducts />
     </>
   );

@@ -7,12 +7,31 @@ import "react-toastify/dist/ReactToastify.css";
 import App from "./App";
 import "./index.css";
 
-// Providers
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { WishlistProvider } from "./context/WishlistContext";
 import { OrdersProvider } from "./context/OrdersContext";
 import { ThemeProvider } from "./context/ThemeContext";
+
+const savedTheme = localStorage.getItem("theme");
+const systemPrefersDark = window.matchMedia(
+  "(prefers-color-scheme: dark)",
+).matches;
+
+const initialTheme =
+  savedTheme === "light" || savedTheme === "dark"
+    ? savedTheme
+    : systemPrefersDark
+      ? "dark"
+      : "light";
+
+if (initialTheme === "dark") {
+  document.documentElement.classList.add("dark");
+  document.documentElement.style.colorScheme = "dark";
+} else {
+  document.documentElement.classList.remove("dark");
+  document.documentElement.style.colorScheme = "light";
+}
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

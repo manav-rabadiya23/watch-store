@@ -29,10 +29,8 @@ export default function App() {
       <ScrollToTop />
       <Navbar />
 
-      {/* ✅ FIXED HEIGHT + MOBILE SAFE */}
       <main className="min-h-[calc(100vh-120px)] overflow-x-hidden px-0">
         <Routes>
-          {/* Public routes */}
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/product/:slug" element={<ProductDetails />} />
@@ -41,7 +39,6 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
-          {/* Protected routes */}
           <Route
             path="/cart"
             element={
@@ -105,7 +102,6 @@ export default function App() {
             }
           />
 
-          {/* 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

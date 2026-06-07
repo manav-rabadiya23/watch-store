@@ -46,11 +46,9 @@ export default function Navbar() {
     "rounded-xl px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-emerald-600 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-emerald-400";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-950/75">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950">
       <div className="mx-auto max-w-7xl px-3 py-2 sm:px-4 md:px-6 md:py-4">
-        {/* TOP BAR */}
         <div className="flex items-center justify-between gap-3">
-          {/* LOGO */}
           <Link to="/" className="flex items-center gap-2 sm:gap-3">
             <div className="rounded-xl border border-slate-200 bg-[#f7f1e8] p-1.5 sm:p-2 dark:border-slate-800 dark:bg-slate-900">
               <img
@@ -70,7 +68,6 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* DESKTOP NAV */}
           <div className="hidden items-center gap-6 lg:flex">
             <NavLink to="/" className={navLinkClass}>
               Home
@@ -108,7 +105,7 @@ export default function Navbar() {
 
                 <button
                   onClick={handleLogout}
-                  className="rounded-xl bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600"
+                  className="rounded-xl bg-red-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-600"
                 >
                   Logout
                 </button>
@@ -121,28 +118,36 @@ export default function Navbar() {
 
                 <Link
                   to="/signup"
-                  className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700 dark:bg-white dark:text-slate-900"
+                  className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-700 dark:bg-white dark:text-slate-900"
                 >
                   Signup
                 </Link>
               </>
             )}
 
-            {/* THEME */}
             <button
               onClick={toggleTheme}
-              className="grid h-10 w-10 place-items-center rounded-full border border-slate-300 bg-white dark:border-slate-700 dark:bg-slate-900"
+              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white transition-all duration-300 hover:scale-105 dark:border-slate-700 dark:bg-slate-900"
+              aria-label="Toggle theme"
+              title={
+                theme === "dark"
+                  ? "Switch to light mode"
+                  : "Switch to dark mode"
+              }
             >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+              {theme === "dark" ? (
+                <Sun size={18} className="text-yellow-400" />
+              ) : (
+                <Moon size={18} className="text-slate-700" />
+              )}
             </button>
           </div>
 
-          {/* MOBILE ICONS */}
           <div className="flex items-center gap-2 lg:hidden">
             <Link to="/wishlist" className="relative p-2 text-sm">
               ♥
               {wishlistCount > 0 && (
-                <span className="absolute -top-1 -right-1 text-[9px] bg-emerald-600 text-white px-1 rounded-full">
+                <span className="absolute -right-1 -top-1 rounded-full bg-emerald-600 px-1 text-[9px] text-white">
                   {wishlistCount}
                 </span>
               )}
@@ -151,25 +156,44 @@ export default function Navbar() {
             <Link to="/cart" className="relative p-2 text-sm">
               🛒
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 text-[9px] bg-emerald-600 text-white px-1 rounded-full">
+                <span className="absolute -right-1 -top-1 rounded-full bg-emerald-600 px-1 text-[9px] text-white">
                   {cartCount}
                 </span>
               )}
             </Link>
 
-            <button onClick={toggleTheme} className="p-2">
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            <button
+              onClick={toggleTheme}
+              className="rounded-full p-2 transition hover:bg-slate-100 dark:hover:bg-slate-800"
+              aria-label="Toggle theme"
+              title={
+                theme === "dark"
+                  ? "Switch to light mode"
+                  : "Switch to dark mode"
+              }
+            >
+              {theme === "dark" ? (
+                <Sun size={18} className="text-yellow-400" />
+              ) : (
+                <Moon
+                  size={18}
+                  className="text-slate-700 dark:text-slate-200"
+                />
+              )}
             </button>
 
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="rounded-full p-2 transition hover:bg-slate-100 dark:hover:bg-slate-800"
+              aria-label="Toggle menu"
+            >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
 
-        {/* MOBILE MENU */}
         {isMenuOpen && (
-          <div className="mt-3 rounded-2xl border bg-white p-3 dark:bg-slate-950">
+          <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-950">
             <nav className="flex flex-col gap-2">
               <Link
                 to="/"
@@ -232,7 +256,7 @@ export default function Navbar() {
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="bg-red-500 text-white px-3 py-2 rounded-xl"
+                    className="rounded-xl bg-red-500 px-3 py-2 text-white transition hover:bg-red-600"
                   >
                     Logout
                   </button>
@@ -248,7 +272,8 @@ export default function Navbar() {
                   </Link>
                   <Link
                     to="/signup"
-                    className="bg-slate-900 text-white px-3 py-2 rounded-xl"
+                    className="rounded-xl bg-slate-900 px-3 py-2 text-white transition hover:bg-emerald-700"
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     Signup
                   </Link>
