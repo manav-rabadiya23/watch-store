@@ -106,107 +106,130 @@ export default function ProductDetails() {
           <span className="text-slate-900 dark:text-white">{product.name}</span>
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[32px] border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <div className="overflow-hidden rounded-[28px] bg-[#f3ede5] dark:bg-slate-800">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="h-[520px] w-full object-cover transition duration-500 hover:scale-[1.03]"
-              />
-            </div>
-
-            <div className="mt-5 grid grid-cols-3 gap-3 sm:grid-cols-4">
-              <div className="rounded-[20px] border border-slate-200 bg-slate-50 p-2 dark:border-slate-800 dark:bg-slate-800">
+        <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+          {/* LEFT SIDE */}
+          <div className="space-y-5">
+            <div className="rounded-[32px] border border-slate-200 bg-white p-5 shadow-sm">
+              <div className="overflow-hidden rounded-[28px] bg-[#f3ede5]">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="h-20 w-full rounded-[14px] object-cover"
+                  className="h-[520px] w-full object-cover transition duration-500 hover:scale-[1.03]"
                 />
               </div>
+            </div>
 
-              <div className="rounded-[20px] border border-dashed border-slate-200 bg-white p-2 dark:border-slate-700 dark:bg-slate-900">
-                <div className="flex h-20 items-center justify-center rounded-[14px] bg-slate-50 text-xs font-medium text-slate-400 dark:bg-slate-800 dark:text-slate-500">
-                  Premium View
+            <div className="grid max-w-[720px] gap-4 sm:grid-cols-2">
+              <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm">
+                <h3 className="text-lg font-semibold text-slate-900">
+                  Highlights
+                </h3>
+
+                <div className="mt-4 grid grid-cols-2 gap-x-1 gap-y-2 text-sm text-slate-600">
+                  {product.tags?.map((tag) => (
+                    <div key={tag}>• {tag}</div>
+                  ))}
                 </div>
               </div>
+              <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm">
+                <h3 className="text-lg font-semibold text-slate-900">
+                  Specifications
+                </h3>
 
-              <div className="rounded-[20px] border border-dashed border-slate-200 bg-white p-2 dark:border-slate-700 dark:bg-slate-900">
-                <div className="flex h-20 items-center justify-center rounded-[14px] bg-slate-50 text-xs font-medium text-slate-400 dark:bg-slate-800 dark:text-slate-500">
-                  Detail View
-                </div>
-              </div>
+                <div className="mt-4 space-y-2 text-sm">
+                  <div className="grid grid-cols-[90px_1fr] items-center gap-3">
+                    <span className="text-slate-500">Brand</span>
+                    <span className="font-semibold text-slate-900">
+                      {product.brand}
+                    </span>
+                  </div>
 
-              <div className="rounded-[20px] border border-dashed border-slate-200 bg-white p-2 dark:border-slate-700 dark:bg-slate-900">
-                <div className="flex h-20 items-center justify-center rounded-[14px] bg-slate-50 text-xs font-medium text-slate-400 dark:bg-slate-800 dark:text-slate-500">
-                  Style View
+                  <div className="grid grid-cols-[90px_1fr] items-center gap-3">
+                    <span className="text-slate-500">Category</span>
+                    <span className="font-semibold text-slate-900">
+                      {product.category}
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-[90px_1fr] items-center gap-3">
+                    <span className="text-slate-500">Type</span>
+                    <span className="font-semibold text-slate-900">
+                      Luxury Watch
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-[90px_1fr] items-center gap-3">
+                    <span className="text-slate-500">Warranty</span>
+                    <span className="font-semibold text-slate-900">1 Year</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
+          {/* RIGHT SIDE */}
           <div className="flex flex-col justify-center">
             <div className="flex flex-wrap items-center gap-3">
-              <p className="text-sm font-medium uppercase tracking-[0.22em] text-emerald-800 dark:text-emerald-400">
+              <p className="text-sm font-medium uppercase tracking-[0.22em] text-emerald-800">
                 {product.brand} • {product.category}
               </p>
 
-              <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
+              <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
                 In Stock
               </span>
             </div>
 
-            <h1 className="mt-4 text-4xl font-semibold tracking-[-0.03em] text-slate-900 dark:text-white md:text-5xl">
+            <h1 className="mt-4 text-4xl font-semibold tracking-[-0.03em] text-slate-900 md:text-5xl">
               {product.name}
             </h1>
 
             <div className="mt-4 flex items-center gap-4">
-              <p className="text-3xl font-semibold text-slate-900 dark:text-white">
+              <p className="text-3xl font-semibold text-slate-900">
                 {formattedPrice}
               </p>
-              <p className="text-sm text-slate-500 line-through dark:text-slate-400">
+              <p className="text-sm text-slate-500 line-through">
                 {formattedOldPrice}
               </p>
-              <span className="rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-600 dark:bg-red-900/20 dark:text-red-300">
+              <span className="rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-600">
                 20% OFF
               </span>
             </div>
 
-            <div className="mt-5 flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+            <div className="mt-5 flex items-center gap-3 text-sm text-slate-600">
               <span className="text-amber-500">★ ★ ★ ★ ☆</span>
               <span>4.6 rating</span>
               <span>•</span>
               <span>128 reviews</span>
             </div>
 
-            <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-300">
+            <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600">
               {product.description}
             </p>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              <div className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-                <p className="text-sm font-semibold text-slate-900 dark:text-white">
+              <div className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm">
+                <p className="text-sm font-semibold text-slate-900">
                   Estimated Delivery
                 </p>
-                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                <p className="mt-2 text-sm leading-6 text-slate-600">
                   Delivered in 3–5 business days across India.
                 </p>
               </div>
 
-              <div className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-                <p className="text-sm font-semibold text-slate-900 dark:text-white">
+              <div className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm">
+                <p className="text-sm font-semibold text-slate-900">
                   Authenticity
                 </p>
-                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                <p className="mt-2 text-sm leading-6 text-slate-600">
                   Premium quality checked before dispatch.
                 </p>
               </div>
 
-              <div className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-                <p className="text-sm font-semibold text-slate-900 dark:text-white">
+              <div className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm">
+                <p className="text-sm font-semibold text-slate-900">
                   Easy Returns
                 </p>
-                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                <p className="mt-2 text-sm leading-6 text-slate-600">
                   7-day simple return support for eligible orders.
                 </p>
               </div>
@@ -216,7 +239,7 @@ export default function ProductDetails() {
               <button
                 type="button"
                 onClick={handleAddToCart}
-                className="rounded-2xl bg-slate-900 px-8 py-4 text-sm font-semibold text-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-emerald-800 hover:shadow-lg dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+                className="rounded-2xl bg-slate-900 px-8 py-4 text-sm font-semibold text-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-emerald-800 hover:shadow-lg"
               >
                 Add to Cart
               </button>
@@ -224,7 +247,7 @@ export default function ProductDetails() {
               <button
                 type="button"
                 onClick={handleAddAndGoToCart}
-                className="rounded-2xl border border-slate-300 bg-white px-8 py-4 text-sm font-semibold text-slate-800 transition duration-300 hover:border-slate-400 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800"
+                className="rounded-2xl border border-slate-300 bg-white px-8 py-4 text-sm font-semibold text-slate-800 transition duration-300 hover:border-slate-400 hover:bg-slate-50"
               >
                 Buy Now
               </button>
@@ -234,85 +257,43 @@ export default function ProductDetails() {
                 onClick={handleWishlistToggle}
                 className={`rounded-2xl border px-6 py-4 text-sm font-semibold transition duration-300 ${
                   liked
-                    ? "border-red-200 bg-red-50 text-red-600 dark:border-red-900/40 dark:bg-red-950/30 dark:text-red-300"
-                    : "border-slate-300 bg-white text-slate-800 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800"
+                    ? "border-red-200 bg-red-50 text-red-600"
+                    : "border-slate-300 bg-white text-slate-800 hover:bg-slate-50"
                 }`}
               >
                 {liked ? "♥ Wishlisted" : "♡ Wishlist"}
               </button>
             </div>
 
-            <div className="mt-10 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                  Highlights
-                </h3>
-                <ul className="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-300">
-                  {product.tags?.map((tag) => (
-                    <li key={tag}>• {tag}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                  Specifications
-                </h3>
-                <div className="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-300">
-                  <div className="flex justify-between gap-4">
-                    <span>Brand</span>
-                    <span className="font-medium text-slate-900 dark:text-white">
-                      {product.brand}
-                    </span>
-                  </div>
-                  <div className="flex justify-between gap-4">
-                    <span>Category</span>
-                    <span className="font-medium text-slate-900 dark:text-white">
-                      {product.category}
-                    </span>
-                  </div>
-                  <div className="flex justify-between gap-4">
-                    <span>Type</span>
-                    <span className="font-medium text-slate-900 dark:text-white">
-                      {product.type}
-                    </span>
-                  </div>
-                  <div className="flex justify-between gap-4">
-                    <span>Warranty</span>
-                    <span className="font-medium text-slate-900 dark:text-white">
-                      1 Year
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+            <div className="mt-8 rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm">
+              <h3 className="text-lg font-semibold text-slate-900">
                 Why customers love it
               </h3>
+
               <div className="mt-4 grid gap-4 sm:grid-cols-3">
                 <div>
-                  <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                  <p className="text-sm font-semibold text-slate-900">
                     Premium Look
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
                     Elegant design that fits daily wear and occasion styling.
                   </p>
                 </div>
+
                 <div>
-                  <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                  <p className="text-sm font-semibold text-slate-900">
                     Comfortable Fit
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
                     Made for smooth wrist feel and all-day comfort.
                   </p>
                 </div>
+
                 <div>
-                  <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                  <p className="text-sm font-semibold text-slate-900">
                     Great Gift Option
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
                     A stylish choice for birthdays, events, and celebrations.
                   </p>
                 </div>
@@ -320,7 +301,6 @@ export default function ProductDetails() {
             </div>
           </div>
         </div>
-
         <div className="mt-20">
           <div className="mb-8 flex items-end justify-between gap-4">
             <div>
