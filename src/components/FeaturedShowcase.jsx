@@ -5,9 +5,7 @@ import watch2Img from "../assets/watch2.jpeg";
 import watch3Img from "../assets/watch3.jpeg";
 import watch4Img from "../assets/watch4.jpeg";
 
-import watch1Vid from "../assets/watch1.mp4";
 import watch2Vid from "../assets/watch2.mp4";
-import watch3Vid from "../assets/watch3.mp4";
 import watch4Vid from "../assets/watch4.mp4";
 
 const cards = [

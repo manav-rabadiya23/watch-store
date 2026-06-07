@@ -1,37 +1,66 @@
 import { Link } from "react-router-dom";
 
+const featuredProducts = [
+  {
+    id: 1,
+    name: "Rolex Submariner Black",
+    slug: "rolex-submariner-black",
+    price: "₹1,999",
+    description: "Premium stylish watch",
+  },
+  {
+    id: 2,
+    name: "Omega Seamaster Blue",
+    slug: "omega-seamaster-blue",
+    price: "₹2,499",
+    description: "Elegant modern design",
+  },
+  {
+    id: 3,
+    name: "Tag Heuer Carrera",
+    slug: "tag-heuer-carrera",
+    price: "₹2,999",
+    description: "Luxury sporty watch",
+  },
+  {
+    id: 4,
+    name: "Fossil Grant Brown",
+    slug: "fossil-grant-brown",
+    price: "₹1,799",
+    description: "Classic leather style",
+  },
+];
+
 const FeaturedProducts = () => {
   return (
-    <section className="px-4 py-10 sm:px-6 md:px-10 md:py-16 bg-white dark:bg-slate-950 transition-colors duration-300">
+    <section className="bg-white px-4 py-10 sm:px-6 md:px-10 md:py-16">
       <div className="mx-auto max-w-7xl">
-        <h2 className="text-2xl font-semibold text-slate-900 dark:text-white mb-8">
+        <h2 className="mb-8 text-2xl font-semibold text-slate-900">
           Featured Products
         </h2>
 
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {[1, 2, 3, 4].map((item) => (
+          {featuredProducts.map((product) => (
             <div
-              key={item}
-              className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900"
+              key={product.id}
+              className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md"
             >
-              <div className="h-40 bg-slate-100 dark:bg-slate-800 rounded-lg mb-4"></div>
+              <div className="mb-4 h-40 rounded-lg bg-slate-100"></div>
 
-              <h3 className="text-lg font-medium text-slate-900 dark:text-white">
-                Watch {item}
+              <h3 className="text-lg font-medium text-slate-900">
+                {product.name}
               </h3>
 
-              <p className="text-sm text-slate-600 dark:text-slate-400">
-                Premium stylish watch
-              </p>
+              <p className="text-sm text-slate-600">{product.description}</p>
 
               <div className="mt-3 flex items-center justify-between">
-                <span className="font-semibold text-slate-900 dark:text-white">
-                  ₹1999
+                <span className="font-semibold text-slate-900">
+                  {product.price}
                 </span>
 
                 <Link
-                  to="/product/1"
-                  className="text-sm text-emerald-700 dark:text-emerald-400 hover:underline"
+                  to={`/product/${product.slug}`}
+                  className="text-sm text-emerald-700 hover:underline"
                 >
                   View
                 </Link>
